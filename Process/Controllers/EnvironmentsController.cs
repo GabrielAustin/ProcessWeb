@@ -19,5 +19,21 @@ namespace Process.Controllers
             TheEnvironmentFactory.Release();
             return response;
         }
+
+        public HttpResponseMessage Get([FromUri]string Environment)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            if (TheEnvironmentFactory.VerifyDomain(Environment))
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, true);
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, false);
+            }
+
+            return response;
+        }
     }
 }

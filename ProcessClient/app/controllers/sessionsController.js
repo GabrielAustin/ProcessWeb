@@ -11,13 +11,15 @@
         var vm = this;
 
         vm.title = "Login"
-        vm.user = { name: "", pass: "", envi: user.server };
+        vm.user = { name: "", pass: "", envi: "" };
         vm.isLogged = processEngine.isLogged;
         vm.login = login;
         vm.loginRecover = loginRecover;
         vm.loginRenew = loginRenew;
         vm.logout = logout;
         vm.response = {};
+
+        activate();
 
 
         function login() {
@@ -69,5 +71,31 @@
                 })
         }
 
+        function activate() {
+            if (!!$state.params.environmentName) {
+               return verifyEnvironment();
+            }
+            if (!!user.server) {
+                vm.user.server = user.server;
+                return vm.user.server;
+            }
+            else {
+                $state.go('environments');
+                return false; 
+            }
+        }
+
+        function verifyEnvironment() {
+            processEngine.verifyEnvironment($state.params.environmentName)
+                .then(function (isVerified) {
+                    if (isVerified) {
+                        vm.user.server = $state.params.environmentName;
+                        return isVerified;
+                    } else {
+                        $state.go('environments');
+                        return isVerified;
+                    }
+                })
+        }
     }
 })();
