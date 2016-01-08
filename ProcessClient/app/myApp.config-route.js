@@ -29,7 +29,18 @@
                         controllerAs: 'vm'
                     }
                 }
-            }).state('root', {
+            })
+            .state('login.environment', {
+                url: '/:environmentName',
+                views: {
+                    '': {
+                        templateUrl: 'app/views/sessions.html',
+                        controller: 'SessionsController',
+                        controllerAs: 'vm'
+                    }
+                }
+            })
+            .state('root', {
                 url: '',
                 abstract: true,
                 views: {

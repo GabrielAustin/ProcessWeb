@@ -7,6 +7,6 @@ namespace Process.Models
 {
     public class DomainModel
     {
-        public string name;
+        public string name { get; set; }
     }
 }

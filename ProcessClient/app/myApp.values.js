@@ -5,8 +5,8 @@
         .module('myApp')
 
         .value('user', {
-            name: 'John Doe',
-            server: 'Default'
+            name: false,
+            server: false
         });
 
 })();

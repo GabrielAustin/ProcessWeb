@@ -62,5 +62,11 @@ namespace Process.Factories
             return domain;
         }
 
+        public Boolean VerifyDomain(string name)
+        {
+            Environment.set_Ambiente(name);
+            return !String.IsNullOrEmpty(Environment.LeerVarAmbienteEx(name,"idioma"));
+        }
+
     }
 }

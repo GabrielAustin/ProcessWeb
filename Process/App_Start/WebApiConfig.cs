@@ -33,8 +33,8 @@ namespace Process
 
             config.Routes.MapHttpRoute(
                 name: "Environment",
-                routeTemplate: "environments/",
-                defaults: new { controller = "environments" }
+                routeTemplate: "environments/{environment}",
+                defaults: new { controller = "environments", environment = RouteParameter.Optional }
             );
         }
     }

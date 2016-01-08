@@ -81,6 +81,7 @@
         var engine = {
             //$environments
             getEnvironments: getEnvironments,
+            verifyEnvironment: verifyEnvironment,
             //$sessions
             getSession: getSession,
             postSession: postSession,
@@ -104,6 +105,25 @@
 
             function getEnvironmentsFailed(error) {
                 console.log('Get Environments Failed.' + error.data)
+            }
+        }
+
+        function verifyEnvironment(serverName) {
+            return $http.get(API + '/environments/' + serverName)
+                .then(verifyEnvironmentComplete)
+                .catch(verifyEnvironmentFailed);
+
+            function verifyEnvironmentComplete(response) {
+                if (response.data === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function verifyEnvironmentFailed(error) {
+                console.log('Nof Found');
+                return error;
             }
         }
 
